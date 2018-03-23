@@ -12,6 +12,8 @@ import pyscreenshot as ImageGrab
 import pytesseract
 
 # take the longitude and latitude of the four vertex of the solar cell pack, calculate the location of each cell and write the result in the csv
+
+
 def returncvs(left_upper_long, left_upper_lati, left_lower_long, left_lower_lati, right_upper_long, right_upper_lati, right_lower_long, right_lower_lati):
     x = (right_upper_long-left_upper_long+right_lower_long-left_lower_long)/266
     y = -(right_upper_lati-right_lower_lati+left_upper_lati-left_lower_lati)/6
@@ -27,6 +29,11 @@ def returncvs(left_upper_long, left_upper_lati, left_lower_long, left_lower_lati
 
 
 # read the image of the target and apply gaussian filter and canny detection to get the boundary
+m = PyMouse()
+m.click(1200, 80)
+time.sleep(1)
+im = ImageGrab.grab()
+im.save('solar.png')
 img = cv2.imread('solar.png', 0)
 img = cv2.GaussianBlur(img, (3, 3), 0)
 canny = cv2.Canny(img, 50, 720)
